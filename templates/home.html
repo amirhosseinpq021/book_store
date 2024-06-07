@@ -1,0 +1,36 @@
+{% extends '_base.html' %}
+{% load crispy_forms_filters %}
+
+
+{% block page_title %}
+    home
+{% endblock %}
+
+
+
+
+
+{% block content %}
+
+    <p>home pages</p>
+
+
+    {% if user.is_authenticated %}
+
+        <form action="{% url 'logout' %}" method="post">
+            {% csrf_token %}
+            <button type="submit">logout</button>
+        </form>
+
+        {% else %}
+
+        <a href="{% url 'login' %}">login</a>
+
+
+
+    {% endif %}
+
+
+
+
+{% endblock %}
