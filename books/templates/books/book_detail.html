@@ -8,12 +8,16 @@
 
 {% block content %}
 
-        <h4>{{ book_details.title }}</h4>
-        <h4>{{ book_details.description }}</h4>
-        <h4>{{ book_details.price }}</h4>
-        <h4>{{ book_details.author }}</h4>
-        <h4>{{ book_details.category }}</h4>
-        <h4>{{ book_details.created_at }}</h4>
+    <h4>{{ book_details.title }}</h4>
+    <h4>{{ book_details.description }}</h4>
+    <h4>{{ book_details.price }}</h4>
+    <h4>{{ book_details.author }}</h4>
+    <h4>{{ book_details.category }}</h4>
+    <h4>{{ book_details.created_at }}</h4>
+
+
+
+    <a href="{% url 'book_list' %}">back home</a>
 
 
 

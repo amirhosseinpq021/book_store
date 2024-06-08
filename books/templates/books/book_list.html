@@ -16,6 +16,8 @@
         <h4>{{ book.author }}</h4>
         <h4>{{ book.category }}</h4>
         <h4>{{ book.created_at }}</h4>
+        <a href="{% url 'edit_book' book.pk %}">edit</a>
+        <a href="{% url 'delete_book' book.pk %}">delete</a>
 
     {% endfor %}
     <a href="{% url 'book_create' %}">add new book</a>
