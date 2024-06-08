@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     # book_store apps
     'accounts',
     'pages',
+    'book',
 
     # crispy
     "crispy_forms",
