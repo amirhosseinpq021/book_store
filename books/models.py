@@ -13,9 +13,16 @@ class Category(models.Model):
         return self.category_name
 
 
+class Authors(models.Model):
+    full_name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.full_name
+
+
 class Book(models.Model):
     title = models.CharField(max_length=200)
-    author = models.CharField(max_length=200)
+    author = models.ForeignKey(Authors, on_delete=models.CASCADE)
     description = models.TextField(max_length=2000)
     price = models.DecimalField(max_digits=5, decimal_places=2)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
