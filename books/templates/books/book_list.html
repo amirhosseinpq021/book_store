@@ -18,6 +18,7 @@
         <h4>{{ book.created_at }}</h4>
 
     {% endfor %}
+    <a href="{% url 'book_create' %}">add new book</a>
 
 
 {% endblock %}
