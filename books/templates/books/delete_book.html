@@ -7,16 +7,16 @@
 
 {% block content %}
 
-    <div class="container">
+    <div class="container" dir='rtl'>
 
-    <div class="card shadow my-3 p-5">
+    <div class="card shadow my-3 p-5" dir="rtl">
 
-        <h1>Are you sure?</h1>
-        <p>Are you sure you want to delete the {{ delete_book.title }}?</p>
+        <p>ایا میخواهید این کتاب را حذف کنید ؟</p>
+        <h3>{{ delete_book.title }}</h3>
 
         <form action="" method="post">
             {% csrf_token %}
-            <input class="btn btn-danger" type="submit" value="yes delete">
+            <input class="btn btn-danger" type="submit" value="بله حذف شود">
         </form>
 
     </div>
