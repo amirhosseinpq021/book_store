@@ -17,9 +17,11 @@
                 <div class="card m-2" style="max-width: 45%">
                     <div class="row g-0 h-100" dir="rtl">
                         <div class="col-md-4">
+                            {% if book.cover %}
                             <img src="{{ book.cover.url }}"
                                  class="img-fluid rounded-start" alt="...">
                         </div>
+                        {% endif %}
                         <div class="col-md-8 h-100">
                             <div class="d-flex flex-column justify-content-between h-100">
                                 <div class="card-body">
