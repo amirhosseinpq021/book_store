@@ -25,8 +25,10 @@
     <!--css-->
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 
+
+
     {% block style %}
-    
+
     {% endblock %}
 
 </head>
@@ -50,6 +52,19 @@
             </div>
         </div>
 
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <div class="input-group">
+                      <form action="{% url 'search_book' %}" method="GET" class="form-control border-end-0 border rounded-pill">
+                        <input type="text" name="keyword">
+                        <button type="submit">search</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+
         {% if user.is_authenticated %}
 
             <div class="mx-2 text-white"> خوش آمدی {{ user.username }}</div>
@@ -65,6 +80,7 @@
 
 
         {% endif %}
+
 
     </div>
 </nav>

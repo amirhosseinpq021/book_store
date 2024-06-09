@@ -8,4 +8,7 @@ urlpatterns = [
     path('book/edit/<int:pk>/', views.EditBook.as_view(), name='edit_book'),
     path('book/delete/<int:pk>/', views.DeleteBook.as_view(), name='delete_book'),
 
+    # search box
+    path('search/', views.search_posts, name='search_book'),
+
 ]
