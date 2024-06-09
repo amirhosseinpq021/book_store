@@ -12,25 +12,6 @@
 
 {% block content %}
 
-    <p>home pages</p>
-
-
-    {% if user.is_authenticated %}
-
-        {{ user.username }} | <form action="{% url 'logout' %}" method="post">
-            {% csrf_token %}
-            <button type="submit">logout</button>
-        </form>
-
-        {% else %}
-
-        <a href="{% url 'login' %}">login</a>
-
-        <a href="{% url 'signup' %}">signup</a>
-
-    {% endif %}
-
-
 
 
 {% endblock %}
