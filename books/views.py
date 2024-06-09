@@ -2,11 +2,10 @@ from django.shortcuts import render
 from django.views import generic
 from django.urls import reverse_lazy
 
-from .models import Book
+from .models import Book, Category
 from .forms import BookCreatForm
-
+from django.shortcuts import render, get_object_or_404, redirect
 from django.db.models import Q
-
 
 
 class BookListView(generic.ListView):
@@ -46,11 +45,18 @@ def search_posts(request):
     keyword = request.GET.get('keyword')
 
     search_results = Book.objects.filter(
-        Q(title__icontains=keyword) | Q(author__full_name__icontains=keyword) | Q(category__category_name__icontains=keyword)
-                                    )
+        Q(title__icontains=keyword) | Q(author__full_name__icontains=keyword) | Q(
+            category__category_name__icontains=keyword)
+    )
 
     context = {
         'search_results': search_results,
         'keyword': keyword,
     }
     return render(request, 'books/search_result.html', context)
+
+
+class AllCategory(generic.ListView):
+    model = Category
+    template_name = 'books/category.html'
+    context_object_name = 'category'

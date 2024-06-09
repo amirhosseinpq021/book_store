@@ -10,5 +10,6 @@ urlpatterns = [
 
     # search box
     path('search/', views.search_posts, name='search_book'),
-
+    # category
+    path('category/', views.AllCategory.as_view(), name='category'),
 ]
