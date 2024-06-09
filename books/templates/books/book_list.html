@@ -26,6 +26,7 @@
                                     <h3 class="card-title"><strong>{{ book.title }}</strong></h3>
                                     <p class="card-text pt-3">{{ book.description | truncatewords:20 }}</p>
                                     <p class="text-muted">نویسنده: {{ book.author }} </p>
+                                    <a href="{{ book.get_absolute_url }}"><button type="button" class="btn btn-light">مشاهده...</button></a>
                                 </div>
                             </div>
                         </div>
