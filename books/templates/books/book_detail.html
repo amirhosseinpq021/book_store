@@ -1,5 +1,5 @@
 {% extends '_base.html' %}
-
+{% load book_tags %}
 {% block page_title %}
     جزییات کتاب
 {% endblock %}
@@ -8,10 +8,10 @@
 
 {% block content %}
 
-    <h4>{{ book_details.title  }}</h4>
+    <h4>{{ book_details.title| upper_case  }}</h4>
     <h4>{{ book_details.description| linebreaksbr }}</h4>
     <h4>{{ book_details.price }}</h4>
-    <h4>{{ book_details.author }}</h4>
+    <h4>{{ book_details.author  }}</h4>
     <h4>{{ book_details.category }}</h4>
     <h4>{{ book_details.created_at }}</h4>
 
