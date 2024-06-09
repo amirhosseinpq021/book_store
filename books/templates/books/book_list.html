@@ -10,12 +10,12 @@
 
 
     {% for book in books %}
-        <a href="{{ book.get_absolute_url }}"><h4>{{ book.title }}</h4></a>
-        <h4>{{ book.description }}</h4>
+        <a href="{{ book.get_absolute_url }}"><h4>{{ book.title | title }}</h4></a>
+        <h4>{{ book.description | truncatewords:30 }}</h4>
         <h4>{{ book.price }}</h4>
         <h4>{{ book.author }}</h4>
         <h4>{{ book.category }}</h4>
-        <h4>{{ book.created_at }}</h4>
+        <h4>{{ book.created_at | timesince }} ago </h4>
         <a href="{% url 'edit_book' book.pk %}">edit</a>
         <a href="{% url 'delete_book' book.pk %}">delete</a>
 
