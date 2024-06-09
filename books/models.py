@@ -23,6 +23,7 @@ class Authors(models.Model):
 
 class Book(models.Model):
     title = models.CharField(max_length=200)
+    cover = models.ImageField(upload_to='cover/', blank=True)
     author = models.ForeignKey(Authors, on_delete=models.CASCADE)
     description = models.TextField(max_length=2000)
     price = models.DecimalField(max_digits=5, decimal_places=2)

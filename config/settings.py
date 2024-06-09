@@ -138,3 +138,7 @@ LOGOUT_REDIRECT_URL = 'book_list'
 
 # Email config
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# media
+MEDIA_URL = '/media/'
+MEDIA_ROOT = str(BASE_DIR.joinpath('media'))
