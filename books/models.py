@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from django.contrib.auth import get_user_model
 
 
 class Category(models.Model):
@@ -25,7 +26,7 @@ class Book(models.Model):
     title = models.CharField(max_length=200)
     cover = models.ImageField(upload_to='cover/', blank=True)
     author = models.ForeignKey(Authors, on_delete=models.CASCADE)
-    description = models.TextField(max_length=2000)
+    description = models.TextField()
     price = models.PositiveIntegerField(max_length=20, blank=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -37,4 +38,13 @@ class Book(models.Model):
     def get_absolute_url(self):
         return reverse('book_detail', args=[self.id])
 
+
+class Comment(models.Model):
+    text = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
+    book = models.ForeignKey(Book, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"{self.user}: {self.text}"
 
