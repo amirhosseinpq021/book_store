@@ -6,6 +6,8 @@
 {% endblock %}
 
 {% block content %}
+        {% if user.is_staff %}
+
     {% load crispy_forms_tags %}
 
     <div class="container mt-4" dir="rtl">
@@ -39,5 +41,6 @@
 {#        </div>#}
     </div>
 </div>
+    {% endif %}
 
 {% endblock %}

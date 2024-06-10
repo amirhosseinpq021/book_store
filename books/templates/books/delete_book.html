@@ -6,6 +6,7 @@
 {% endblock %}
 
 {% block content %}
+    {% if user.is_staff %}
 
     <div class="container" dir='rtl'>
 
@@ -21,4 +22,6 @@
 
     </div>
     </div>
+        {% endif %}
+
 {% endblock %}
