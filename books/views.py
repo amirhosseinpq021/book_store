@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.views import generic
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 
 from .models import Book, Category, Comment
 from .forms import BookCreatForm, CommentForm
@@ -63,7 +63,7 @@ class EditBook(LoginRequiredMixin, UserPassesTestMixin, generic.UpdateView):
     model = Book
     form_class = BookCreatForm
     template_name = 'books/edit_book.html'
-    success_url = reverse_lazy('book_list')
+    # success_url = reverse_lazy('book_list')
     context_object_name = 'form'
 
     def test_func(self):
@@ -107,7 +107,6 @@ class EditComment(LoginRequiredMixin, UserPassesTestMixin, generic.UpdateView):
     model = Comment
     form_class = CommentForm
     template_name = 'books/edit_comments.html'
-    success_url = reverse_lazy('book_list')
     context_object_name = 'form'
 
     def test_func(self):
@@ -124,3 +123,5 @@ class DeleteComment(LoginRequiredMixin, UserPassesTestMixin, generic.DeleteView)
     def test_func(self):
         obj = self.get_object()
         return obj.user == self.request.user
+
+
