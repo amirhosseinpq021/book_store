@@ -37,7 +37,7 @@ def book_detail(request, pk):
             return HttpResponseRedirect(request.path_info)
     else:
         form = CommentForm()
-        comments = book.comments.all()
+        comments = book.comments.filter(is_active=True).order_by('-created_at')
 
     context = {
         'book_details': book,
