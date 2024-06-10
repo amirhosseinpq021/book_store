@@ -50,13 +50,13 @@
                     <div class="my-3 p-5 w-sm-75 w-100">
 
                         {% if user.username == book_details.user.username %}
-                        <a href="{% url 'delete_book' book_details.pk %}">
-                            <button type="button" class="btn btn-light">حدف کتاب</button>
-                        </a>
-                        <span> یا </span>
-                        <a href="{% url 'edit_book' book_details.pk %}">
-                            <button type="button" class="btn btn-light">ویرایش کتاب</button>
-                        </a>
+                            <a href="{% url 'delete_book' book_details.pk %}">
+                                <button type="button" class="btn btn-light">حدف کتاب</button>
+                            </a>
+                            <span> یا </span>
+                            <a href="{% url 'edit_book' book_details.pk %}">
+                                <button type="button" class="btn btn-light">ویرایش کتاب</button>
+                            </a>
                         {% endif %}
                     </div>
                 </div>
@@ -78,7 +78,19 @@
                                 {% endif %}
 
                                 <p>نظر : {{ comment.text|linebreaksbr }}</p>
+
+                                {% if user.username == comment.user.username %}
+                                    <a href="{% url 'edit_comments' comment.pk %}">
+                                        <button type="button" class="btn btn-light">ویرایش کامنت</button>
+                                    </a>
+                                    <span> | </span>
+                                    <a href="{% url 'delete_comments' comment.pk %}">
+                                        <button type="button" class="btn btn-light">حذف کانت</button>
+                                    </a>
+                                {% endif %}
+
                             </div>
+
                         {% endfor %}
 
 

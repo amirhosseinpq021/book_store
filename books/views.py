@@ -101,3 +101,26 @@ class AllCategory(generic.ListView):
     model = Category
     template_name = 'books/category.html'
     context_object_name = 'category'
+
+
+class EditComment(LoginRequiredMixin, UserPassesTestMixin, generic.UpdateView):
+    model = Comment
+    form_class = CommentForm
+    template_name = 'books/edit_comments.html'
+    success_url = reverse_lazy('book_list')
+    context_object_name = 'form'
+
+    def test_func(self):
+        obj = self.get_object()
+        return obj.user == self.request.user
+
+
+class DeleteComment(LoginRequiredMixin, UserPassesTestMixin, generic.DeleteView):
+    model = Comment
+    template_name = 'books/delete_comment.html'
+    success_url = reverse_lazy('book_list')
+    context_object_name = 'delete_comment'
+
+    def test_func(self):
+        obj = self.get_object()
+        return obj.user == self.request.user

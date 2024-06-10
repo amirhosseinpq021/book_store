@@ -12,4 +12,7 @@ urlpatterns = [
     path('search/', views.search_posts, name='search_book'),
     # category
     path('category/', views.AllCategory.as_view(), name='category'),
+    # edit and delete comments by user
+    path('edit/comment/<int:pk>/', views.EditComment.as_view(), name='edit_comments'),
+    path('delete/comment/<int:pk>/', views.DeleteComment.as_view(), name='delete_comments'),
 ]
