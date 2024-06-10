@@ -8,6 +8,7 @@ from .forms import BookCreatForm, CommentForm
 from django.shortcuts import render, get_object_or_404, redirect
 from django.db.models import Q
 from django.http import HttpResponseRedirect
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 class BookListView(generic.ListView):
@@ -48,13 +49,17 @@ def book_detail(request, pk):
     return render(request, 'books/book_detail.html', context)
 
 
-class BookCreate(generic.CreateView):
+class BookCreate(LoginRequiredMixin, generic.CreateView):
     form_class = BookCreatForm
     template_name = 'books/add_book.html'
     context_object_name = 'form'
 
+    # def form_valid(self, form):  # new
+    #     form.instance.author = self.request.user
+    #     return super().form_valid(form)
 
-class EditBook(generic.UpdateView):
+
+class EditBook(LoginRequiredMixin, generic.UpdateView):
     model = Book
     form_class = BookCreatForm
     template_name = 'books/edit_book.html'
@@ -62,7 +67,7 @@ class EditBook(generic.UpdateView):
     context_object_name = 'form'
 
 
-class DeleteBook(generic.DeleteView):
+class DeleteBook(LoginRequiredMixin, generic.DeleteView):
     model = Book
     template_name = 'books/delete_book.html'
     success_url = reverse_lazy('book_list')

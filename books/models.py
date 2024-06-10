@@ -24,6 +24,7 @@ class Authors(models.Model):
 
 class Book(models.Model):
     title = models.CharField(max_length=200)
+    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     cover = models.ImageField(upload_to='cover/', blank=True)
     author = models.ForeignKey(Authors, on_delete=models.CASCADE)
     description = models.TextField()
