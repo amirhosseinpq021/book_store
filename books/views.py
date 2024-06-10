@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.views import generic
 from django.urls import reverse_lazy
 
-from .models import Book, Category
+from .models import Book, Category, Comment
 from .forms import BookCreatForm
 from django.shortcuts import render, get_object_or_404, redirect
 from django.db.models import Q
@@ -15,10 +15,20 @@ class BookListView(generic.ListView):
     paginate_by = 12
 
 
-class BookDetail(generic.DetailView):
-    model = Book
-    template_name = 'books/book_detail.html'
-    context_object_name = 'book_details'
+# class BookDetail(generic.DetailView):
+#     model = Book
+#     template_name = 'books/book_detail.html'
+#     context_object_name = 'book_details'
+
+def book_detail(request, pk):
+    book = get_object_or_404(Book, pk=pk)
+    # comments = Comment.objects.filter(book=book)
+    comments = book.comments.all()
+    context = {
+        'book_details': book,
+        'comments': comments,
+    }
+    return render(request, 'books/book_detail.html', context)
 
 
 class BookCreate(generic.CreateView):
