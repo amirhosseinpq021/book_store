@@ -108,6 +108,7 @@ class EditComment(LoginRequiredMixin, UserPassesTestMixin, generic.UpdateView):
     form_class = CommentForm
     template_name = 'books/edit_comments.html'
     context_object_name = 'form'
+    success_url = reverse_lazy('book_list')
 
     def test_func(self):
         obj = self.get_object()
@@ -123,5 +124,7 @@ class DeleteComment(LoginRequiredMixin, UserPassesTestMixin, generic.DeleteView)
     def test_func(self):
         obj = self.get_object()
         return obj.user == self.request.user
+
+
 
 
