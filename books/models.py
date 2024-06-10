@@ -27,7 +27,7 @@ class Book(models.Model):
     cover = models.ImageField(upload_to='cover/', blank=True)
     author = models.ForeignKey(Authors, on_delete=models.CASCADE)
     description = models.TextField()
-    price = models.PositiveIntegerField(max_length=20, blank=True)
+    price = models.PositiveIntegerField(blank=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -46,5 +46,5 @@ class Comment(models.Model):
     book = models.ForeignKey(Book, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f"{self.user}: {self.text}"
+        return self.text
 
