@@ -5,7 +5,7 @@ from .models import Book, Comment
 class BookCreatForm(forms.ModelForm):
     class Meta:
         model = Book
-        fields = '__all__'
+        fields = ('title', 'cover', 'author', 'description', 'price', 'category')
 
 
 class CommentForm(forms.ModelForm):

@@ -54,9 +54,9 @@ class BookCreate(LoginRequiredMixin, generic.CreateView):
     template_name = 'books/add_book.html'
     context_object_name = 'form'
 
-    # def form_valid(self, form):  # new
-    #     form.instance.author = self.request.user
-    #     return super().form_valid(form)
+    def form_valid(self, form):  # new
+        form.instance.user = self.request.user
+        return super().form_valid(form)
 
 
 class EditBook(LoginRequiredMixin, generic.UpdateView):
