@@ -9,9 +9,9 @@ class BookAdmin(admin.ModelAdmin):
 
 
 class CommentAdmin(admin.ModelAdmin):
-    list_display = ('text', 'user', 'book', 'created_at')
-    search_fields = ('text', 'user__username', 'book__title', 'created_at')
-    list_editable = ('user', 'book',)
+    list_display = ('text', 'user', 'book', 'created_at', 'is_active', 'recommend')
+    search_fields = ('text', 'user__username', 'book__title', 'created_at', 'is_active', 'recommend')
+    list_editable = ('user', 'book', 'is_active', 'recommend')
 
 
 admin.site.register(Category)

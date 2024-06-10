@@ -1,11 +1,13 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.views import generic
 from django.urls import reverse_lazy
 
 from .models import Book, Category, Comment
-from .forms import BookCreatForm
+from .forms import BookCreatForm, CommentForm
 from django.shortcuts import render, get_object_or_404, redirect
 from django.db.models import Q
+from django.http import HttpResponseRedirect
 
 
 class BookListView(generic.ListView):
@@ -20,14 +22,29 @@ class BookListView(generic.ListView):
 #     template_name = 'books/book_detail.html'
 #     context_object_name = 'book_details'
 
+
+@login_required(login_url='login')
 def book_detail(request, pk):
     book = get_object_or_404(Book, pk=pk)
     # comments = Comment.objects.filter(book=book)
-    comments = book.comments.all()
+    if request.method == 'POST':
+        comment_form = CommentForm(request.POST)
+        if comment_form.is_valid():
+            comment = comment_form.save(commit=False)
+            comment.user = request.user
+            comment.book = book
+            comment.save()
+            return HttpResponseRedirect(request.path_info)
+    else:
+        form = CommentForm()
+        comments = book.comments.all()
+
     context = {
         'book_details': book,
         'comments': comments,
+        'form': form,
     }
+
     return render(request, 'books/book_detail.html', context)
 
 
