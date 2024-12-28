@@ -8,6 +8,14 @@ class CustomUserCreationForm(UserCreationForm):
         # fields = UserCreationForm.Meta.fields + ('age',)
         fields = ('username', 'email', 'first_name', 'last_name', 'age',)
 
+        help_texts = {
+            'username': 'لطفا شامل حروف بزرگ و کوچک و عددی باشد',  # حذف متن راهنما
+            'email': 'لطفاایمیل معتبر وارد کنید ',
+            'age': 'سن واقعی خودتان را وارد کنید',
+            'password confirmation': 'تکرار رمز عبور را صحیح وارد کنید',
+            'password': 'شامل حروف بزرگ و کوچک و عدد باشد',
+        }
+
     def __init__(self, *args, **kwargs):  # delete password help text
         super().__init__(*args, **kwargs)
         self.fields['password1'].help_text = None
