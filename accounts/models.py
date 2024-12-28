@@ -11,3 +11,5 @@ class CustomUser(AbstractUser):
     # استان و شهر
     province = models.CharField(max_length=100, null=True, blank=True)  # استان
     city = models.CharField(max_length=100, null=True, blank=True)  # شهر
+    # جنسیت
+    gender = models.BooleanField(null=True, blank=True)
