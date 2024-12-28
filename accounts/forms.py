@@ -6,7 +6,8 @@ class CustomUserCreationForm(UserCreationForm):
     class Meta:
         model = CustomUser
         # fields = UserCreationForm.Meta.fields + ('age',)
-        fields = ('username', 'email', 'first_name', 'last_name', 'age',)
+        fields = ('username', 'email', 'first_name', 'last_name', 'age', 'national_code',
+                  'address', 'postal_code', 'province', 'city',)
 
         help_texts = {
             'username': 'لطفا شامل حروف بزرگ و کوچک و عددی باشد',  # حذف متن راهنما
@@ -26,4 +27,5 @@ class CustomUserChangeForm(UserChangeForm):
     class Meta:
         model = CustomUser
         # fields = UserChangeForm.Meta.fields
-        fields = ('username', 'email', 'first_name', 'last_name', 'age',)
+        fields = ('username', 'email', 'first_name', 'last_name', 'age', 'national_code',
+                  'address', 'postal_code', 'province', 'city', )
