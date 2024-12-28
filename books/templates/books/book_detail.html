@@ -1,4 +1,5 @@
 {% extends '_base.html' %}
+{% load humanize %}
 {% load book_tags %}
 {% load crispy_forms_tags %}
 {% block page_title %}
@@ -35,7 +36,16 @@
                         </div>
                         <div class="col-xs-12 col-md-3 d-flex flex-column">
                             <h3 class="align-self-center pt-2 text-muted align-self-md-end">
-                                {{ book_details.price }} تومان
+                                {{ book_details.get_discounted_price|floatformat:0|intcomma }} تومان
+                            </h3>
+
+                             <h3 class="align-self-center pt-2 text-muted align-self-md-end">
+                                 {% if book_details.discount_percentage > 0  %}
+
+                                 {{ book_details.discount_percentage|floatformat:0|intcomma }} درصد تخفیف
+
+                                 {% endif %}
+
                             </h3>
                         </div>
                     </div>

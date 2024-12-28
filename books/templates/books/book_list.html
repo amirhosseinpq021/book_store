@@ -1,5 +1,7 @@
 {% extends '_base.html' %}
+{% load humanize %}
 {% load static %}
+
 
 {% block page_title %}
     ALL BOOKS
@@ -29,7 +31,7 @@
                                     <p class="card-text pt-3">{{ book.description | truncatewords:20 }}</p>
                                     <p class="text-muted">نویسنده: {{ book.author }} </p>
                                     <p class="text-muted">دسته بندی: {{ book.category }} </p>
-                                    <p class="text-muted">قیمت: {{ book.price }} تومان </p>
+                                    <p class="text-muted">قیمت: {{ book.get_discounted_price|floatformat:0|intcomma   }} تومان </p>
                                     <a href="{{ book.get_absolute_url }}">
                                         <button type="button" class="btn btn-light">مشاهده...</button>
                                     </a>

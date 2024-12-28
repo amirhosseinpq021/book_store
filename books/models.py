@@ -29,6 +29,7 @@ class Book(models.Model):
     author = models.ForeignKey(Authors, on_delete=models.CASCADE)
     description = models.TextField()
     price = models.PositiveIntegerField(blank=True)
+    discount_percentage = models.DecimalField(max_digits=5, decimal_places=2, default=0)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -38,6 +39,15 @@ class Book(models.Model):
 
     def get_absolute_url(self):
         return reverse('book_detail', args=[self.id])
+
+    def get_discounted_price(self):
+        """
+        این متد قیمت کتاب با در نظر گرفتن تخفیف را محاسبه می‌کند.
+        """
+        if self.discount_percentage > 0:
+            discount_amount = (self.discount_percentage / 100) * self.price
+            return self.price - discount_amount
+        return self.price  # اگر تخفیفی نباشد، قیمت اصلی کتاب بازگشت داده می‌شود.
 
 
 class Comment(models.Model):
