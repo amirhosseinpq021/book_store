@@ -3,10 +3,10 @@ from .models import Book, Category, Authors, Comment
 
 
 class BookAdmin(admin.ModelAdmin):
-    list_display = ('title', 'author', 'price', 'category', 'user', 'discount_percentage')
+    list_display = ('title', 'author', 'price', 'category', 'user', 'get_discounted_price',  'book_discount_percentage')
     search_fields = ('title', 'price', 'category__category_name', 'author__full_name', 'user__username',
-                     'discount_percentage')
-    list_editable = ('price', 'category', 'author', 'user', 'discount_percentage')
+                     'get_discounted_price', 'book_discount_percentage')
+    list_editable = ('price', 'category', 'author', 'user',  'book_discount_percentage')
 
 
 class CategoryAdmin(admin.ModelAdmin):

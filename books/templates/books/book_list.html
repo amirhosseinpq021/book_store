@@ -32,11 +32,12 @@
                                     <p class="text-muted">نویسنده: {{ book.author }} </p>
                                     <p class="text-muted">دسته بندی: {{ book.category }} </p>
 
-                                    {% if book.get_discounted_price_by_category >= 0  %}
-
-                                        <p class="text-muted">قیمت: {{ book.price.discount_percentage|floatformat:0|intcomma   }} تومان </p>
-                                        {% else %}
-                                        <p class="text-muted">قیمت: {{ book.get_discounted_price_by_category|floatformat:0|intcomma   }} تومان </p>
+                                    {% if book.get_discounted_price > 0 and book.get_discounted_price < book.price %}
+                                        <p class="text-muted">
+                                            قیمت: {{ book.get_discounted_price|floatformat:0|intcomma }} تومان </p>
+{#                                        <p class="text-danger">تخفیف: {{ book.price|floatformat:0|intcomma }} تومان </p>#}
+                                    {% else %}
+                                        <p class="text-muted">قیمت: {{ book.price|floatformat:0|intcomma }} تومان </p>
                                     {% endif %}
 
                                     <a href="{{ book.get_absolute_url }}">

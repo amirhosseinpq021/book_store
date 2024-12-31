@@ -34,9 +34,12 @@ class Book(models.Model):
     cover = models.ImageField(upload_to='cover/', blank=True)
     author = models.ForeignKey(Authors, on_delete=models.CASCADE)
     description = models.TextField()
-    price = models.PositiveIntegerField(blank=True)
-    # price_after_discount = models.PositiveIntegerField(blank=True)
-    discount_percentage = models.DecimalField(max_digits=5, decimal_places=2, default=0)
+    price = models.DecimalField(max_digits=10, decimal_places=2)
+    book_discount_percentage = models.DecimalField(
+        max_digits=5, decimal_places=2, default=0.00,
+        validators=[MinValueValidator(0), MaxValueValidator(100)],
+        help_text="Percentage discount for this book (0-100)."
+    )
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -49,19 +52,17 @@ class Book(models.Model):
 
     def get_discounted_price(self):
         """
-        این متد قیمت کتاب با در نظر گرفتن تخفیف را محاسبه می‌کند.
+        Calculate the final discounted price based on book and category discounts.
+        The highest discount (book or category) will be applied.
         """
-        if self.discount_percentage > 0:
-            discount_amount = (self.discount_percentage / 100) * self.price
-            return self.price - discount_amount
-        return self.price  # اگر تخفیفی نباشد، قیمت اصلی کتاب بازگشت داده می‌شود.
-
-    def get_discounted_price_by_category(self):
-        """Calculate the price after applying the category discount."""
-        if self.category and self.category.discount_percentage_category > 0:
-            discount = (self.price * self.category.discount_percentage_category) / 100
-            return self.price - discount
-        return self.price
+        category_discount = (
+            self.category.discount_percentage_category
+            if self.category and self.category.discount_percentage_category > 0
+            else 0
+        )
+        max_discount = max(self.book_discount_percentage, category_discount)
+        discount = (self.price * max_discount) / 100
+        return self.price - discount
 
     def save(self, *args, **kwargs):
         # Apply discount before saving
