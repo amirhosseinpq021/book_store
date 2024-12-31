@@ -9,13 +9,20 @@ class BookAdmin(admin.ModelAdmin):
     list_editable = ('price', 'category', 'author', 'user', 'discount_percentage')
 
 
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = ('category_name', 'discount_percentage_category')
+    list_editable = ('discount_percentage_category',)
+    search_fields = ('category_name',)
+    ordering = ('category_name',)
+
+
 class CommentAdmin(admin.ModelAdmin):
     list_display = ('text', 'user', 'book', 'created_at', 'is_active', 'recommend')
     search_fields = ('text', 'user__username', 'book__title', 'created_at', 'is_active', 'recommend')
     list_editable = ('user', 'book', 'is_active', 'recommend')
 
 
-admin.site.register(Category)
+admin.site.register(Category, CategoryAdmin)
 admin.site.register(Book, BookAdmin)
 admin.site.register(Authors)
 admin.site.register(Comment, CommentAdmin)
