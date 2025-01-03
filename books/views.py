@@ -53,6 +53,7 @@ class BookCreate(LoginRequiredMixin, generic.CreateView):
     form_class = BookCreatForm
     template_name = 'books/add_book.html'
     context_object_name = 'form'
+    success_url = reverse_lazy('book_list')
 
     def form_valid(self, form):  # new
         form.instance.user = self.request.user
